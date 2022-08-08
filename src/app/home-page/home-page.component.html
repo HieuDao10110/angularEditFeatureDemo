@@ -1,0 +1,50 @@
+<!-- Page Content -->
+<div class="container"> 
+   <div class="row"> 
+      <div class="col-lg-12 text-center" style="padding-top: 20px;">
+         <div class="container" style="padding-left: 0px; padding-right: 0px;"> 
+            <div class="row"> 
+               <div class="col-sm" style="text-align: left;"> 
+                  {{ title }} 
+               </div> 
+               <div class="col-sm" style="text-align: right;"> 
+                  <button type="button" class="btn btn-primary" (click)="onEditCloseItems()">Edit</button> 
+               </div> 
+            </div> 
+         </div> 
+         <div class="container box" style="margin-top: 10px;"> 
+            <table class="table table-striped" [ngClass]="{'table-striped': !isEditItems}"> 
+               <thead> 
+                  <tr> 
+                     <th>ID</th> 
+                     <th>ITEM</th> 
+                  </tr> 
+               </thead> 
+
+               <tbody *ngIf="!isEditItems"> 
+                  <tr *ngFor="let entry of expenseEntry"> 
+                     <td scope="row">{{ entry.id }}</td> 
+                     <td>{{ entry.item }}</td> 
+                  </tr> 
+               </tbody> 
+
+               <tbody *ngIf="isEditItems"> 
+                  <tr *ngFor="let entry of expenseEntry; let i = index"> 
+                     <td class="input-group">
+                        <button (click)="deleteFieldValue(i)" class="input-group-text">X</button>
+                        <input [(ngModel)]="entry.id" type="text" aria-label="ID" class="form-control" value="{{ entry.id }}" placeholder="ID">
+                     </td>
+                     <td>
+                        <input [(ngModel)]="entry.item" type="text" aria-label="Item" class="form-control" value="{{ entry.item }}" placeholder="Item">
+                     </td>
+                  </tr> 
+               </tbody> 
+            </table> 
+            <div *ngIf="isEditItems" class="d-flex align-items-center justify-content-center">
+               <button class="btn btn-success btn-sm" type="button" (click)="addFieldValue()" style="margin-right:10px">Add More Item</button>
+               <button (click)="onEditCloseItems()" class="btn btn-primary btn-sm" type="button">Save Items</button>
+            </div>
+         </div> 
+      </div> 
+   </div> 
+ </div>
